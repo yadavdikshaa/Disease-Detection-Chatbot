@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      let symptoms = [];
+
+      function getSymptomsData(data) {
+        symptoms = data;
+      }
+      getSymptomsData({{data | tojson }});
+    </script>
+    <title>Meddy - Medical Chatbot</title>
+  </head>
+
+  <body>
+    <div class="app-container">
+      <div class="chat-wrapper">
+        <!-- Header -->
+        <div class="chat-header">
+          <div class="header-content">
+            <div class="avatar-wrapper">
+              <div class="avatar-icon">
+                <i class="fas fa-user-doctor"></i>
+              </div>
+              <div class="status-indicator"></div>
+            </div>
+            <div class="header-info">
+              <h3 class="chat-title">Meddy</h3>
+              <p class="chat-subtitle">Medical Assistant</p>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn" id="start-over" title="Start Over">
+              <i class="fas fa-redo"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="messages-container" id="conversation">
+          <div class="message-wrapper bot-message">
+            <div class="message-avatar">
+              <i class="fas fa-user-doctor"></i>
+            </div>
+            <div class="message-content">
+              <div class="message-bubble bot-bubble">
+                <div class="message-text">
+                  Welcome! I'm <strong>Meddy</strong>, your medical assistant. 
+                  I'm here to help you understand your symptoms better.
+                  <br><br>
+                  Please describe the symptoms you're experiencing. When you're done, type <strong>'Done'</strong> to get a diagnosis.
+                  <br><br>
+                  <em>Note: Enter as many symptoms as possible for the most accurate prediction.</em>
+                </div>
+              </div>
+              <div class="message-time">Just now</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-container">
+          <div class="input-wrapper">
+            <div class="symptoms-autocomplete" id="symptoms-list"></div>
+            <div class="input-group">
+              <input 
+                type="text" 
+                id="message-text" 
+                class="message-input" 
+                placeholder="Type your symptoms here..."
+                autocomplete="off"
+              />
+              <button class="send-button" id="send" title="Send">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
